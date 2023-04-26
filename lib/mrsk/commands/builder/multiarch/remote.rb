@@ -22,11 +22,11 @@ class Mrsk::Commands::Builder::Multiarch::Remote < Mrsk::Commands::Builder::Mult
     end
 
     def create_local_buildx
-      docker :buildx, :create, "--name", builder_name, builder_name_with_arch(local["arch"]), "--platform", "linux/#{local["arch"]}"
+      docker :buildx, :create, "--name", builder_name, builder_name_with_arch(local["arch"]), "--platform", "linux/#{local["arch"]}", "--buildkitd-flags", "'--allow-insecure-entitlement network.host'"
     end
 
     def append_remote_buildx
-      docker :buildx, :create, "--append", "--name", builder_name, builder_name_with_arch(remote["arch"]), "--platform", "linux/#{remote["arch"]}"
+      docker :buildx, :create, "--append", "--name", builder_name, builder_name_with_arch(remote["arch"]), "--platform", "linux/#{remote["arch"]}", "--buildkitd-flags", "'--allow-insecure-entitlement network.host'"
     end
 
     def create_contexts

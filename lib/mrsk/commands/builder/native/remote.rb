@@ -58,7 +58,7 @@ class Mrsk::Commands::Builder::Native::Remote < Mrsk::Commands::Builder::Native
     end
 
     def create_buildx
-      docker :buildx, :create, "--name", builder_name, builder_name_with_arch, "--platform", platform
+      docker :buildx, :create, "--name", builder_name, builder_name_with_arch, "--platform", platform, "--buildkitd-flags", "'--allow-insecure-entitlement network.host'"
     end
 
     def remove_buildx
