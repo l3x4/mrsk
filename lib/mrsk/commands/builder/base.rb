@@ -10,7 +10,7 @@ class Mrsk::Commands::Builder::Base < Mrsk::Commands::Base
   end
 
   def build_options
-    [ *build_tags, *build_labels, *build_args, *build_secrets, *build_dockerfile ]
+    [ *build_tags, *build_labels, *build_args, *build_secrets, *build_network, *build_dockerfile ]
   end
 
   def build_context
@@ -36,6 +36,10 @@ class Mrsk::Commands::Builder::Base < Mrsk::Commands::Base
 
     def build_dockerfile
       argumentize "--file", dockerfile
+    end
+
+    def build_network
+      argumentize "--network", "host"
     end
 
     def args
