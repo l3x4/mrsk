@@ -10,7 +10,7 @@ class Mrsk::Commands::Builder::Base < Mrsk::Commands::Base
   end
 
   def build_options
-    [ *build_tags, *build_labels, *build_args, *build_secrets, *build_network, *build_dockerfile ]
+    [ *build_tags, *build_labels, *build_args, *build_secrets, *buildkitd_flags, *build_network, *build_dockerfile ]
   end
 
   def build_context
@@ -36,6 +36,10 @@ class Mrsk::Commands::Builder::Base < Mrsk::Commands::Base
 
     def build_dockerfile
       argumentize "--file", dockerfile
+    end
+
+    def buildkitd_flags
+      argumentize "--buildkitd-flags", "'--allow-insecure-entitlement network.host'"
     end
 
     def build_network
